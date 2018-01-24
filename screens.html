@@ -1,1038 +1,1018 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Виджет телефона</title>
-  <meta name="format-detection" content="telephone=no"><!--Убирает подсветку номеров в edge-->
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-/*
-    Стили для демонстрации элементов: 
-    1) Задана картинка меню (для наглядности)
-    2) Убран фокус у всех элементов
-    3) Всем элементам задан box-sizing: border-box;
-*/
-    body {
-      background: 
-        url(img/bg-image.png) no-repeat,
-        url(img/bg-image.png) no-repeat,
-        url(img/bg-image.png) no-repeat,
-        url(img/bg-image.png) no-repeat,
-        url(img/bg-image.png) no-repeat,
-        url(img/bg-image.png) no-repeat,
-        url(img/bg-image.png) no-repeat;
-      background-position: 
-        center top,
-        center 130px,
-        center 270px,
-        center 850px,
-        center 1000px,
-        center 1150px,
-        center 1300px;
-      margin: 0;
-      padding: 0;
-      width: 1437px;
-      margin: auto;
-      min-height: 500vh;
-      padding-left: 117px;
-      box-sizing: border-box;
-      position: relative;
-    }
-
-    *:focus {
-      outline: none;
-    }
-
-    html { -webkit-box-sizing: border-box; box-sizing: border-box;}
-
-    *, 
-    *::before, 
-    *::after { -webkit-box-sizing: inherit; box-sizing: inherit; }
-    
-/*    4) Презентационное позиционирование виджета и его экранов ( .pw )*/
-    
-    .pw:nth-child(1) {
-      
-    }
-    
-    .pw:nth-child(2) {
-      position: absolute;
-      left: 117px;
-      top: 130px;
-    }
-    
-    .pw:nth-child(3) {
-      position: absolute;
-      left: 117px;
-      top: 270px;
-    }
-    
-    .pw:nth-child(4) {
-      position: absolute;
-      left: 117px;
-      top: 850px;
-    }
-    
-    .pw:nth-child(5) {
-      position: absolute;
-      left: 117px;
-      top: 1000px;
-    }
-    
-    .pw:nth-child(6) {
-      position: absolute;
-      left: 117px;
-      top: 1150px;
-    }
-    
-    .pw:nth-child(7) {
-      position: absolute;
-      left: 117px;
-      top: 1300px;
-    }
-    
-    .screns-presentation .pw-viewport:nth-child(1) {
-      position: absolute;
-      left: 147px;
-      top: 1900px;
-    }
-    
-    .screns-presentation .pw-viewport:nth-child(2) {
-      position: absolute;
-      left: 497px;
-      top: 1900px;
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(3) {
-      position: absolute;
-      left: 847px;
-      top: 1900px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(4) {
-      position: absolute;
-      left: 147px;
-      top: 2450px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(5) {
-      position: absolute;
-      left: 497px;
-      top: 2450px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(6) {
-      position: absolute;
-      left: 147px;
-      top: 3000px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(7) {
-      position: absolute;
-      left: 497px;
-      top: 3000px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(8) {
-      position: absolute;
-      left: 147px;
-      top: 3550px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(9) {
-      position: absolute;
-      left: 147px;
-      top: 4100px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(10) {
-      position: absolute;
-      left: 497px;
-      top: 4100px; 
-    }
-    
-    .screns-presentation .pw-viewport:nth-of-type(11) {
-      position: absolute;
-      left: 847px;
-      top: 4100px; 
-    }
-    
-    .menu {
-      position: fixed; 
-      top: 0; 
-      right: 50%;
-      transform: translateX(600px);
-      width: 300px;
-      display: flex;
-      flex-direction: column;
-      border: 5px solid crimson;
-      background-color: #fff;
-      z-index: 1000;
-    }
-    
-    .menu-item {
-      padding: 10px 5px;
-      font-size: 15px;
-      line-height: 20px;
-      border-bottom: 1px solid silver;
-      text-align: center;
-    }
-    
-    .menu-item:hover {
-      background-color: crimson;
-      color: #fff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Виджет телефона</title>
+    <meta name="format-detection" content="telephone=no">
+    <!--Убирает подсветку номеров в edge-->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /*
+            Стили для демонстрации элементов: 
+            1) Задана картинка меню (для наглядности)
+            2) Убран фокус у всех элементов
+            3) Всем элементам задан box-sizing: border-box;
+        */
+            body {
+              background: 
+                url(img/bg-image.png) no-repeat,
+                url(img/bg-image.png) no-repeat,
+                url(img/bg-image.png) no-repeat,
+                url(img/bg-image.png) no-repeat,
+                url(img/bg-image.png) no-repeat,
+                url(img/bg-image.png) no-repeat,
+                url(img/bg-image.png) no-repeat;
+              background-position: 
+                center top,
+                center 130px,
+                center 270px,
+                center 850px,
+                center 1000px,
+                center 1150px,
+                center 1300px;
+              margin: 0;
+              padding: 0;
+              width: 1437px;
+              margin: auto;
+              min-height: 500vh;
+              padding-left: 117px;
+              box-sizing: border-box;
+              position: relative;
+            }
+        
+            *:focus {
+              outline: none;
+            }
+        
+            html { -webkit-box-sizing: border-box; box-sizing: border-box;}
+        
+            *, 
+            *::before, 
+            *::after { -webkit-box-sizing: inherit; box-sizing: inherit; }
+            
+        /*    4) Презентационное позиционирование виджета и его экранов ( .pw )*/
+            
+            .pw:nth-child(1) {
+              
+            }
+            
+            .pw:nth-child(2) {
+              position: absolute;
+              left: 117px;
+              top: 130px;
+            }
+            
+            .pw:nth-child(3) {
+              position: absolute;
+              left: 117px;
+              top: 270px;
+            }
+            
+            .pw:nth-child(4) {
+              position: absolute;
+              left: 117px;
+              top: 850px;
+            }
+            
+            .pw:nth-child(5) {
+              position: absolute;
+              left: 117px;
+              top: 1000px;
+            }
+            
+            .pw:nth-child(6) {
+              position: absolute;
+              left: 117px;
+              top: 1150px;
+            }
+            
+            .pw:nth-child(7) {
+              position: absolute;
+              left: 117px;
+              top: 1300px;
+            }
+            
+            .screns-presentation .pw-viewport:nth-child(1) {
+              position: absolute;
+              left: 147px;
+              top: 1900px;
+            }
+            
+            .screns-presentation .pw-viewport:nth-child(2) {
+              position: absolute;
+              left: 497px;
+              top: 1900px;
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(3) {
+              position: absolute;
+              left: 847px;
+              top: 1900px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(4) {
+              position: absolute;
+              left: 147px;
+              top: 2450px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(5) {
+              position: absolute;
+              left: 497px;
+              top: 2450px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(6) {
+              position: absolute;
+              left: 147px;
+              top: 3000px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(7) {
+              position: absolute;
+              left: 497px;
+              top: 3000px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(8) {
+              position: absolute;
+              left: 147px;
+              top: 3550px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(9) {
+              position: absolute;
+              left: 147px;
+              top: 4100px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(10) {
+              position: absolute;
+              left: 497px;
+              top: 4100px; 
+            }
+            
+            .screns-presentation .pw-viewport:nth-of-type(11) {
+              position: absolute;
+              left: 847px;
+              top: 4100px; 
+            }
+            
+            .menu {
+              position: fixed; 
+              top: 0; 
+              right: 50%;
+              transform: translateX(600px);
+              width: 300px;
+              display: flex;
+              flex-direction: column;
+              border: 5px solid crimson;
+              background-color: #fff;
+              z-index: 1000;
+            }
+            
+            .menu-item {
+              padding: 10px 5px;
+              font-size: 15px;
+              line-height: 20px;
+              border-bottom: 1px solid silver;
+              text-align: center;
+            }
+            
+            .menu-item:hover {
+              background-color: crimson;
+              color: #fff;
+            }
+    </style>
 </head>
+
 <body class="body">
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle"></button>
-      <button type="button" class="pw-open-toggle">Онлайн телефон</button>
-      
-      <div class="pw-status-info">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport js-pw-scroller-wrapper">
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle"></button>
+            <button type="button" class="pw-open-toggle">Онлайн телефон</button>
 
-    </div>
-    
-    <button class="pw-btn-minimize"></button>
-  </div>
-     
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
-      <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
-      
-      <div class="pw-status-info pw-status-info--display">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport js-pw-scroller-wrapper">
-      
-    </div>
-    
-    <button class="pw-btn-minimize"></button>
-  </div>
-     
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
-      <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
-      
-      <div class="pw-status-info pw-status-info--display">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-full js-pw-scroller-wrapper">
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul>
-      
-      <div class="pw-number-field">
-        <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
-        <button class="pw-number-field__clean-btn pw-number-field__clean-btn--display"></button>
-      </div>  
-      
-      <ul class="pw-numpad">
-        <li class="pw-numpad__btn pw-btn">1</li>
-        <li class="pw-numpad__btn pw-btn">2</li>
-        <li class="pw-numpad__btn pw-btn">3</li>
-
-        <li class="pw-numpad__btn pw-btn">4</li>
-        <li class="pw-numpad__btn pw-btn">5</li>
-        <li class="pw-numpad__btn pw-btn">6</li>
-
-        <li class="pw-numpad__btn pw-btn">7</li>
-        <li class="pw-numpad__btn pw-btn">8</li>
-        <li class="pw-numpad__btn pw-btn">9</li>
-
-        <li class="pw-numpad__btn pw-btn">*</li>
-        <li class="pw-numpad__btn pw-btn">0</li>
-        <li class="pw-numpad__btn pw-btn">#</li>
-      </ul>
-      
-      <ul class="pw-actionpad pw-actionpad--make-call">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
-    </div>
-    
-    <button class="pw-btn-minimize pw-btn-minimize--display"></button>
-  </div>
-     
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
-      <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
-      
-      <div class="pw-status-info pw-status-info--display">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-short js-pw-scroller-wrapper">
-      <div class="pw-indicator pw-indicator--sms">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+            <div class="pw-status-info">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-      </div>
-    </div>
-    
-    <button class="pw-btn-minimize"></button>
-  </div>
-     
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
-      <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
-      
-      <div class="pw-status-info pw-status-info--display">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-short js-pw-scroller-wrapper">
-      <div class="pw-indicator pw-indicator--cancel">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+        <div class="pw-viewport js-pw-scroller-wrapper">
+
         </div>
-      </div>
+
+        <button class="pw-btn-minimize"></button>
     </div>
-    
-    <button class="pw-btn-minimize"></button>
-  </div>
-      
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
-      <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
-      
-      <div class="pw-status-info pw-status-info--display">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-short js-pw-scroller-wrapper"> <!--Окно виджета-->
-      <div class="pw-indicator pw-indicator--call-in">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
+            <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
+
+            <div class="pw-status-info pw-status-info--display">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-      </div>
-    </div>
-    
-    <button class="pw-btn-minimize"></button>
-  </div>
-  
-  <div class="pw">
-    <div class="pw-start-panel">
-      <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
-      <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
-      
-      <div class="pw-status-info pw-status-info--display">
-        <span class="pw-status-info__item-call">2</span>
-        <span class="pw-status-info__item-sms">5</span>
-      </div>
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-full js-pw-scroller-wrapper">
-      <div class="pw-indicator pw-indicator--call-in">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+        <div class="pw-viewport js-pw-scroller-wrapper">
+
         </div>
-      </div>
-      <ul class="pw-functionpad">
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
-        </li>
-      </ul>
-      
-      <ul class="pw-actionpad pw-actionpad--incoming-call">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
-    </div>
-    
-    <button class="pw-btn-minimize pw-btn-minimize--display"></button>
-  </div>
-  
-   
-  
-  <div class="screns-presentation">
-    <div class="pw-viewport pw-viewport--display-full">
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul>
-
-      <div class="pw-number-field">
-        <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
-        <button class="pw-number-field__clean-btn"></button>
-      </div>
-
-      <ul class="pw-numpad">
-        <li class="pw-numpad__btn pw-btn">1</li>
-        <li class="pw-numpad__btn pw-btn">2</li>
-        <li class="pw-numpad__btn pw-btn">3</li>
-
-        <li class="pw-numpad__btn pw-btn">4</li>
-        <li class="pw-numpad__btn pw-btn">5</li>
-        <li class="pw-numpad__btn pw-btn">6</li>
-
-        <li class="pw-numpad__btn pw-btn">7</li>
-        <li class="pw-numpad__btn pw-btn">8</li>
-        <li class="pw-numpad__btn pw-btn">9</li>
-
-        <li class="pw-numpad__btn pw-btn">*</li>
-        <li class="pw-numpad__btn pw-btn">0</li>
-        <li class="pw-numpad__btn pw-btn">#</li>
-      </ul>
-
-      <ul class="pw-actionpad pw-actionpad--make-call">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
+        <button class="pw-btn-minimize"></button>
     </div>
 
-    <div class="pw-viewport pw-viewport--display-full">
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked pw-bar__item--active">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul> 
-      
-      <div class="pw-chats-box js-pw-scroller-wrapper">
-        <div class="pw-chats-box__bar">
-          <div class="pw-chats-box__date">12.04.2017</div>
-          <div class="pw-chats-box__add"></div>
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
+            <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
+
+            <div class="pw-status-info pw-status-info--display">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-        
-        <ul class="pw-chats-box__list js-pw-scroller">
-          <li class="pw-chats-box__item pw-item pw-item--marked pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
 
-          <li class="pw-chats-box__item pw-item pw-item--marked pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+        <div class="pw-viewport pw-viewport--display-full js-pw-scroller-wrapper">
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
 
-          <li class="pw-chats-box__item pw-item pw-item--marked pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+            <div class="pw-number-field">
+                <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
+                <button class="pw-number-field__clean-btn pw-number-field__clean-btn--display"></button>
+            </div>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+            <ul class="pw-numpad">
+                <li class="pw-numpad__btn pw-btn">1</li>
+                <li class="pw-numpad__btn pw-btn">2</li>
+                <li class="pw-numpad__btn pw-btn">3</li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+                <li class="pw-numpad__btn pw-btn">4</li>
+                <li class="pw-numpad__btn pw-btn">5</li>
+                <li class="pw-numpad__btn pw-btn">6</li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+                <li class="pw-numpad__btn pw-btn">7</li>
+                <li class="pw-numpad__btn pw-btn">8</li>
+                <li class="pw-numpad__btn pw-btn">9</li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+                <li class="pw-numpad__btn pw-btn">*</li>
+                <li class="pw-numpad__btn pw-btn">0</li>
+                <li class="pw-numpad__btn pw-btn">#</li>
+            </ul>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+            <ul class="pw-actionpad pw-actionpad--make-call">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
 
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-
-          <li class="pw-chats-box-item pw-item pw-item--chat">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pw-viewport pw-viewport--display-full">
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history pw-bar__item--active">История</li>
-      </ul>
-      
-      <div class="pw-history-box js-pw-scroller-wrapper">
-        <div class="pw-history-box__bar">
-          <div class="pw-history-box__date">12.04.2017</div>
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
         </div>
-        
-        <ul class="pw-history-box__list js-pw-scroller">
-          <li class="pw-history-box__item pw-item pw-item--status--answered pw-item--type--in pw-item--marked">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-          <li class="pw-history-box__item pw-item pw-item--status--answered pw-item--type--internal">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-          <li class="pw-history-box__item pw-item pw-item--status--answered pw-item--type--out">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
 
-          <li class="pw-history-box__item pw-item pw-item--status--missed pw-item--type--in">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-          <li class="pw-history-box__item pw-item pw-item--status--missed pw-item--type--internal">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-          <li class="pw-history-box__item pw-item pw-item--status--missed pw-item--type--out">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-
-          <li class="pw-history-box__item pw-item pw-item--status--fail pw-item--type--in">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-          <li class="pw-history-box__item pw-item pw-item--status--fail pw-item--type--internal">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-          <li class="pw-history-box__item pw-item pw-item--status--fail pw-item--type--out">
-            <div class="pw-item__number">+7 556 463 58 74</div>
-            <div class="pw-item__time">10:12</div>
-          </li>
-        </ul>
-      </div>
+        <button class="pw-btn-minimize pw-btn-minimize--display"></button>
     </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <div class="pw-indicator pw-indicator--call-out">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
+            <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
+
+            <div class="pw-status-info pw-status-info--display">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-      </div>
-      
-      <ul class="pw-functionpad">
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
-        </li>
-      </ul>
-      
-      <ul class="pw-actionpad pw-actionpad--connecting">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
-      
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--active pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul>
-      <div class="pw-chat-box js-pw-scroller-wrapper">
-        <div class="pw-chat-box__bar"> 
-          <button class="pw-chat-box__back"></button>
-          <div class="pw-chat-box__number">+7 556 463 58 74</div>
-        </div> 
-          <ul class="pw-chat-box__sms-list js-pw-scroller" style="width: 297px;">
-            <li class="pw-chat-box__sms pw-chat-box__sms--in">Входящее сообщение</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--out">Исходящее сообщение</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--in">Длиииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииинное входящее сообщение</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--out">Длиииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииинное исходящее сообщение</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--in">.</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--out">.</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--in">Входящее сообщение</li>
-            <li class="pw-chat-box__sms pw-chat-box__sms--out">Исходящее сообщение</li>
-          </ul>
-        <div class="pw-chat-box__field-group">
-          <input type="text" class="pw-chat-box__sms-field" placeholder="Введите сообщение...">
-          <button class="pw-chat-box__send-btn">Отправить</button>
+        <div class="pw-viewport pw-viewport--display-short js-pw-scroller-wrapper">
+            <div class="pw-indicator pw-indicator--sms">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <button class="pw-btn-minimize"></button>
     </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <div class="pw-indicator pw-indicator--call-in">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
+            <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
+
+            <div class="pw-status-info pw-status-info--display">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-      </div>
-      
-      <ul class="pw-functionpad">
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
-        </li>
-      </ul>
-      
-      <ul class="pw-actionpad pw-actionpad--incoming-call">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
-      
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--active pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul>
-
-      <div class="pw-number-field">
-        <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
-        <button class="pw-number-field__clean-btn"></button>
-      </div>
-
-      <ul class="pw-numpad">
-        <li class="pw-numpad__btn pw-btn">1</li>
-        <li class="pw-numpad__btn pw-btn">2</li>
-        <li class="pw-numpad__btn pw-btn">3</li>
-
-        <li class="pw-numpad__btn pw-btn">4</li>
-        <li class="pw-numpad__btn pw-btn">5</li>
-        <li class="pw-numpad__btn pw-btn">6</li>
-
-        <li class="pw-numpad__btn pw-btn">7</li>
-        <li class="pw-numpad__btn pw-btn">8</li>
-        <li class="pw-numpad__btn pw-btn">9</li>
-
-        <li class="pw-numpad__btn pw-btn">*</li>
-        <li class="pw-numpad__btn pw-btn">0</li>
-        <li class="pw-numpad__btn pw-btn">#</li>
-      </ul>
-
-      <ul class="pw-actionpad pw-actionpad--make-chat">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
-    </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <div class="pw-indicator pw-indicator--cancel">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+        <div class="pw-viewport pw-viewport--display-short js-pw-scroller-wrapper">
+            <div class="pw-indicator pw-indicator--cancel">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <ul class="pw-functionpad">
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
-        </li>
-      </ul>
-      
+
+        <button class="pw-btn-minimize"></button>
     </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">     
-     
-      <div class="pw-indicator pw-indicator--call">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
+            <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
+
+            <div class="pw-status-info pw-status-info--display">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-      </div>
-      
-      <ul class="pw-functionpad">
-        <li class="pw-functionpad__btn pw-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
-        </li>
-        <li class="pw-functionpad__btn pw-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
-        </li>
-      </ul>
-      
-      <ul class="pw-actionpad pw-actionpad--call">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
+        <div class="pw-viewport pw-viewport--display-short js-pw-scroller-wrapper">
+            <!--Окно виджета-->
+            <div class="pw-indicator pw-indicator--call-in">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+        </div>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
+        <button class="pw-btn-minimize"></button>
     </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <div class="pw-indicator pw-indicator--call">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+    <div class="pw">
+        <div class="pw-start-panel">
+            <button type="button" class="pw-init-toggle pw-init-toggle--on"></button>
+            <button type="button" class="pw-open-toggle pw-open-toggle--available">Онлайн телефон</button>
+
+            <div class="pw-status-info pw-status-info--display">
+                <span class="pw-status-info__item-call">2</span>
+                <span class="pw-status-info__item-sms">5</span>
+            </div>
         </div>
-      </div>
-       
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul>
 
-      <div class="pw-number-field">
-        <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
-        <button class="pw-number-field__clean-btn"></button>
-      </div>
+        <div class="pw-viewport pw-viewport--display-full js-pw-scroller-wrapper">
+            <div class="pw-indicator pw-indicator--call-in">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+            <ul class="pw-functionpad">
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
+                </li>
+            </ul>
 
-      <ul class="pw-numpad">
-        <li class="pw-numpad__btn pw-btn">1</li>
-        <li class="pw-numpad__btn pw-btn">2</li>
-        <li class="pw-numpad__btn pw-btn">3</li>
+            <ul class="pw-actionpad pw-actionpad--incoming-call">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
 
-        <li class="pw-numpad__btn pw-btn">4</li>
-        <li class="pw-numpad__btn pw-btn">5</li>
-        <li class="pw-numpad__btn pw-btn">6</li>
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
 
-        <li class="pw-numpad__btn pw-btn">7</li>
-        <li class="pw-numpad__btn pw-btn">8</li>
-        <li class="pw-numpad__btn pw-btn">9</li>
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
 
-        <li class="pw-numpad__btn pw-btn">*</li>
-        <li class="pw-numpad__btn pw-btn">0</li>
-        <li class="pw-numpad__btn pw-btn">#</li>
-      </ul>
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
 
-      <ul class="pw-actionpad pw-actionpad--make-call-again">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+        </div>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
-
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
+        <button class="pw-btn-minimize pw-btn-minimize--display"></button>
     </div>
-    
-    <div class="pw-viewport pw-viewport--display-full">
-      <div class="pw-indicator pw-indicator--call">
-        <div class="pw-indicator__info">
-          <div class="pw-indicator__number">+7 965 789 83 67</div>
-          <div class="pw-indicator__time">00:00</div>
+
+
+
+    <div class="screns-presentation">
+        <div class="pw-viewport pw-viewport--display-full">
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
+
+            <div class="pw-number-field">
+                <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
+                <button class="pw-number-field__clean-btn"></button>
+            </div>
+
+            <ul class="pw-numpad">
+                <li class="pw-numpad__btn pw-btn">1</li>
+                <li class="pw-numpad__btn pw-btn">2</li>
+                <li class="pw-numpad__btn pw-btn">3</li>
+
+                <li class="pw-numpad__btn pw-btn">4</li>
+                <li class="pw-numpad__btn pw-btn">5</li>
+                <li class="pw-numpad__btn pw-btn">6</li>
+
+                <li class="pw-numpad__btn pw-btn">7</li>
+                <li class="pw-numpad__btn pw-btn">8</li>
+                <li class="pw-numpad__btn pw-btn">9</li>
+
+                <li class="pw-numpad__btn pw-btn">*</li>
+                <li class="pw-numpad__btn pw-btn">0</li>
+                <li class="pw-numpad__btn pw-btn">#</li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--make-call">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
         </div>
-      </div>
-       
-      <ul class="pw-bar">
-        <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
-        <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
-        <li class="pw-bar__item pw-bar__item--history">История</li>
-      </ul>
 
-      <div class="pw-number-field">
-        <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
-        <button class="pw-number-field__clean-btn"></button>
-      </div>
+        <div class="pw-viewport pw-viewport--display-full">
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked pw-bar__item--active">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
 
-      <ul class="pw-numpad">
-        <li class="pw-numpad__btn pw-btn">1</li>
-        <li class="pw-numpad__btn pw-btn">2</li>
-        <li class="pw-numpad__btn pw-btn">3</li>
+            <div class="pw-chats-box js-pw-scroller-wrapper">
+                <div class="pw-chats-box__bar">
+                    <div class="pw-chats-box__date">12.04.2017</div>
+                    <div class="pw-chats-box__add"></div>
+                </div>
 
-        <li class="pw-numpad__btn pw-btn">4</li>
-        <li class="pw-numpad__btn pw-btn">5</li>
-        <li class="pw-numpad__btn pw-btn">6</li>
+                <ul class="pw-chats-box__list js-pw-scroller">
+                    <li class="pw-chats-box__item pw-item pw-item--marked pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
 
-        <li class="pw-numpad__btn pw-btn">7</li>
-        <li class="pw-numpad__btn pw-btn">8</li>
-        <li class="pw-numpad__btn pw-btn">9</li>
+                    <li class="pw-chats-box__item pw-item pw-item--marked pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
 
-        <li class="pw-numpad__btn pw-btn">*</li>
-        <li class="pw-numpad__btn pw-btn">0</li>
-        <li class="pw-numpad__btn pw-btn">#</li>
-      </ul>
+                    <li class="pw-chats-box__item pw-item pw-item--marked pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
 
-      <ul class="pw-actionpad pw-actionpad--transfer-call">
-        <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
-        </li>
-        
-        <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
-        </li>
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
-        </li>
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
-        </li>
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
 
-        <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
-        </li>
-      </ul>
-    </div>   
-  </div>
-  
-  
-  <div class="menu">
-    <a href="index.html" class="menu-item">Страница с готовым для дальнейшей разработки кодом</a>
-    <a href="screens.html" class="menu-item">Страница презентации экранов</a>
-    <a href="faq.html" class="menu-item">FAQ</a>
-  </div>
-  <script src="js/script.js"></script>
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-chats-box-item pw-item pw-item--chat">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history pw-bar__item--active">История</li>
+            </ul>
+
+            <div class="pw-history-box js-pw-scroller-wrapper">
+                <div class="pw-history-box__bar">
+                    <div class="pw-history-box__date">12.04.2017</div>
+                </div>
+
+                <ul class="pw-history-box__list js-pw-scroller">
+                    <li class="pw-history-box__item pw-item pw-item--status--answered pw-item--type--in pw-item--marked">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                    <li class="pw-history-box__item pw-item pw-item--status--answered pw-item--type--internal">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                    <li class="pw-history-box__item pw-item pw-item--status--answered pw-item--type--out">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-history-box__item pw-item pw-item--status--missed pw-item--type--in">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                    <li class="pw-history-box__item pw-item pw-item--status--missed pw-item--type--internal">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                    <li class="pw-history-box__item pw-item pw-item--status--missed pw-item--type--out">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+
+                    <li class="pw-history-box__item pw-item pw-item--status--fail pw-item--type--in">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                    <li class="pw-history-box__item pw-item pw-item--status--fail pw-item--type--internal">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                    <li class="pw-history-box__item pw-item pw-item--status--fail pw-item--type--out">
+                        <div class="pw-item__number">+7 556 463 58 74</div>
+                        <div class="pw-item__time">10:12</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <div class="pw-indicator pw-indicator--call-out">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+
+            <ul class="pw-functionpad">
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
+                </li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--connecting">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--active pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
+            <div class="pw-chat-box js-pw-scroller-wrapper">
+                <div class="pw-chat-box__bar">
+                    <button class="pw-chat-box__back"></button>
+                    <div class="pw-chat-box__number">+7 556 463 58 74</div>
+                </div>
+                <ul class="pw-chat-box__sms-list js-pw-scroller" style="width: 297px;">
+                    <li class="pw-chat-box__sms pw-chat-box__sms--in">Входящее сообщение</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--out">Исходящее сообщение</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--in">Длиииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииинное входящее сообщение</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--out">Длиииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииииинное исходящее сообщение</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--in">.</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--out">.</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--in">Входящее сообщение</li>
+                    <li class="pw-chat-box__sms pw-chat-box__sms--out">Исходящее сообщение</li>
+                </ul>
+                <div class="pw-chat-box__field-group">
+                    <input type="text" class="pw-chat-box__sms-field" placeholder="Введите сообщение...">
+                    <button class="pw-chat-box__send-btn">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <div class="pw-indicator pw-indicator--call-in">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+
+            <ul class="pw-functionpad">
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
+                </li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--incoming-call">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--active pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
+
+            <div class="pw-number-field">
+                <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
+                <button class="pw-number-field__clean-btn"></button>
+            </div>
+
+            <ul class="pw-numpad">
+                <li class="pw-numpad__btn pw-btn">1</li>
+                <li class="pw-numpad__btn pw-btn">2</li>
+                <li class="pw-numpad__btn pw-btn">3</li>
+
+                <li class="pw-numpad__btn pw-btn">4</li>
+                <li class="pw-numpad__btn pw-btn">5</li>
+                <li class="pw-numpad__btn pw-btn">6</li>
+
+                <li class="pw-numpad__btn pw-btn">7</li>
+                <li class="pw-numpad__btn pw-btn">8</li>
+                <li class="pw-numpad__btn pw-btn">9</li>
+
+                <li class="pw-numpad__btn pw-btn">*</li>
+                <li class="pw-numpad__btn pw-btn">0</li>
+                <li class="pw-numpad__btn pw-btn">#</li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--make-chat">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <div class="pw-indicator pw-indicator--cancel">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+
+            <ul class="pw-functionpad">
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn pw-btn--disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+
+            <div class="pw-indicator pw-indicator--call">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+
+            <ul class="pw-functionpad">
+                <li class="pw-functionpad__btn pw-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 27" height="27" width="19" class="pw-btn__icon"><rect ry="4.5" rx="4.5" height="17" width="9" y="3" x="5"></rect><path d="m2.5 16-1 0c0.1 4.2 3.6 7.5 7.8 7.5h0.5c4.2 0.1 7.7-3.3 7.8-7.5l-1 0c-0.1 3.7-3.1 6.6-6.7 6.5h0-0.5 0c-3.7 0.1-6.7-2.8-6.7-6.5z"></path><path d="M9 23h1v3H9V23Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 18" height="18" width="23" class="pw-btn__icon"><path d="M15.5 1V2c3.6 0 6.5 3.2 6.5 7.2v0.6c0 4-2.9 7.2-6.5 7.2v1c4.2 0 7.5-3.7 7.5-8.2V9.2c0-4.5-3.3-8.2-7.5-8.2z"></path><path d="m14.5 5.3v1c2 0 3.5 1.4 3.5 3.1v0.3c0 1.7-1.5 3.1-3.5 3.1v1c2.4 0 4.5-1.8 4.5-4.1V9.4c0-2.3-2-4.1-4.5-4.1z"></path><path d="m0 6h4l6-6h1V18H10L4 12H0Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" height="21" width="21" class="pw-btn__icon"><circle r="2.5" cy="2.5" cx="2.5"></circle><circle r="2.5" cy="10.5" cx="2.5"></circle><circle r="2.5" cy="18.5" cx="2.5"></circle><circle r="2.5" cy="2.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="10.5"></circle><circle r="2.5" cy="10.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="18.5"></circle><circle r="2.5" cy="2.5" cx="18.5"></circle><circle r="2.5" cy="18.5" cx="10.5"></circle></svg>
+                </li>
+                <li class="pw-functionpad__btn pw-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" width="15" height="16" class="pw-btn__icon"><rect width="5.6" height="16"></rect><rect x="9.4" width="5.6" height="16"></rect></svg>
+                </li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--call">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <div class="pw-indicator pw-indicator--call">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
+
+            <div class="pw-number-field">
+                <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
+                <button class="pw-number-field__clean-btn"></button>
+            </div>
+
+            <ul class="pw-numpad">
+                <li class="pw-numpad__btn pw-btn">1</li>
+                <li class="pw-numpad__btn pw-btn">2</li>
+                <li class="pw-numpad__btn pw-btn">3</li>
+
+                <li class="pw-numpad__btn pw-btn">4</li>
+                <li class="pw-numpad__btn pw-btn">5</li>
+                <li class="pw-numpad__btn pw-btn">6</li>
+
+                <li class="pw-numpad__btn pw-btn">7</li>
+                <li class="pw-numpad__btn pw-btn">8</li>
+                <li class="pw-numpad__btn pw-btn">9</li>
+
+                <li class="pw-numpad__btn pw-btn">*</li>
+                <li class="pw-numpad__btn pw-btn">0</li>
+                <li class="pw-numpad__btn pw-btn">#</li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--make-call-again">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+        </div>
+
+        <div class="pw-viewport pw-viewport--display-full">
+            <div class="pw-indicator pw-indicator--call">
+                <div class="pw-indicator__info">
+                    <div class="pw-indicator__number">+7 965 789 83 67</div>
+                    <div class="pw-indicator__time">00:00</div>
+                </div>
+            </div>
+
+            <ul class="pw-bar">
+                <li class="pw-bar__item pw-bar__item--tel pw-bar__item--active">Телефон</li>
+                <li class="pw-bar__item pw-bar__item--sms pw-bar__item--tel pw-bar__item--marked">СМС</li>
+                <li class="pw-bar__item pw-bar__item--history">История</li>
+            </ul>
+
+            <div class="pw-number-field">
+                <input type="tel" class="pw-number-field__field" placeholder="Введите номер...">
+                <button class="pw-number-field__clean-btn"></button>
+            </div>
+
+            <ul class="pw-numpad">
+                <li class="pw-numpad__btn pw-btn">1</li>
+                <li class="pw-numpad__btn pw-btn">2</li>
+                <li class="pw-numpad__btn pw-btn">3</li>
+
+                <li class="pw-numpad__btn pw-btn">4</li>
+                <li class="pw-numpad__btn pw-btn">5</li>
+                <li class="pw-numpad__btn pw-btn">6</li>
+
+                <li class="pw-numpad__btn pw-btn">7</li>
+                <li class="pw-numpad__btn pw-btn">8</li>
+                <li class="pw-numpad__btn pw-btn">9</li>
+
+                <li class="pw-numpad__btn pw-btn">*</li>
+                <li class="pw-numpad__btn pw-btn">0</li>
+                <li class="pw-numpad__btn pw-btn">#</li>
+            </ul>
+
+            <ul class="pw-actionpad pw-actionpad--transfer-call">
+                <li class="pw-actionpad__btn pw-actionpad__btn--back pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 46" width="25" height="25" class="pw-btn__icon"><polygon points="43 0 43 46 3 23"></polygon></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--chat pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 95" width="25" height="17" class="pw-btn__icon"><path class="st0" d="M131.8 0H4.2C1.9 0 0 1.9 0 4.2V90.8c0 2.3 1.9 4.2 4.2 4.2l83.6-0.2h43.9c2.3 0 4.2-1.9 4.2-4.2V4.2C136 1.9 134.2 0 131.8 0ZM119.2 8.6 68.9 58.9 18.7 8.6ZM8.4 10.3 43.3 45.3 8.4 80.2Zm5.4 76.2 35.4-35.4 16.6 16.7c0.8 0.8 1.8 1.2 3 1.2 1.1 0 2.2-0.4 3-1.2l14.7-14.8 33.2 33.2H85.1m42.6-3.8-35.2-35.2 35.2-35.2z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--call pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" class="pw-btn__icon"><path d="M16.3 21C16.8 21 21 17.9 21 17.5 21 17.1 16.3 14.1 15.9 14.1 15.5 14.1 14.1 15.8 13.8 16 13.4 16.1 11.1 16.1 8.5 13.5 6 11 5.1 8 5.1 7.5 5.1 7.1 7.2 5.7 7.3 5.3 7.4 5 4.5 0 4 0 3.5 0 0 4.3 0 4.7 0 5 0.3 9.6 6.2 15.5 12 21.3 15.9 21 16.3 21Z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--cancel pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="21" height="21" class="pw-btn__icon"><path d="M0 24l4 4 10-10 10 10 4-4L18 14 28 4l-4-4L14 10 4 0 0 4l10 10L0 24z"></path></svg>
+                </li>
+
+                <li class="pw-actionpad__btn pw-actionpad__btn--transfer pw-btn pw-btn--color">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25" class="pw-btn__icon"><path d="M0 88.5H110.5L213.2 215.1 331.7 79h81.7L359 30.5 392.7 0.8 510.1 101.5 393.1 202.5 359 171.6 416.1 122.4l-60.6-0.8-112.4 129.7 112.4 137.7 58.7 0.4-54.8-49.2 33.4-29.7 117.7 100.3-117 101.4-34.5-30.9 57.1-49.6H330.6L211.3 286.4 85.9 432.5-0.4 431.3 0 391.7 0.1 389.1 61.4 389 182.2 250.3 85.4 131.9-0.3 131.3Z"></path></svg>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="menu">
+        <a href="index.html" class="menu-item">Страница с готовым для дальнейшей разработки кодом</a>
+        <a href="screens.html" class="menu-item">Страница презентации экранов</a>
+        <a href="faq.html" class="menu-item">FAQ</a>
+    </div>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
