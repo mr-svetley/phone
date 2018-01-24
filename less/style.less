@@ -1,0 +1,1179 @@
+/******************** buns *****************/
+
+.btn-reset() {
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+.list-reset() {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+@orange: #ee732d;
+@green: #cefa90;
+@red: #ffc7ad;
+@l-green: #f6ffeb;
+@l-red: #ffebe1;
+
+@w: 280px;
+@h: 470px;
+
+/******************** @ *****************/
+
+.pw { -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+.pw *, 
+.pw *::before, 
+.pw *::after { -webkit-box-sizing: inherit; box-sizing: inherit; }
+
+.pw * {
+  &:focus {
+    outline: none;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Exo+2:400,500,600');
+
+@keyframes call-out { 
+  0% {
+    background-position: -100px 0;
+  
+  }
+  
+  50% {
+    background-position: -290px 0;
+  }
+  
+  100% {
+    background-position: -100px 0;
+  
+  }
+}
+
+@keyframes call-in {
+  0% {
+    background-position: 20px 0;
+  
+  }
+  
+  50% {
+    background-position: 220px 0;
+  }
+  
+  100% {
+    background-position: 20px 0;
+  
+  }
+}
+
+/***************** blocks **************/
+//pw - Phone Widget 
+.pw {
+  position: relative;
+  height: 25px;
+  
+  .pw-start-panel {
+    height: 25px;
+  }
+  
+  .pw-init-toggle {
+    margin-right: 8px;
+  }
+  
+  .pw-open-toggle {
+    margin-right: 20px; 
+  }
+  
+  .pw-status-info {
+    
+  }
+  
+  .pw-viewport {
+    position: absolute;
+    left: 0;
+    top: 100%;
+  }
+}
+
+.pw-start-panel {
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.pw-init-toggle {
+  display: inline-block;
+  .btn-reset;
+  width: 30px;
+  height: 15px;
+  border-radius: 8px;
+  background-color: #cbcbcb;
+  cursor: pointer;
+  
+  &:before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-image: url(../img/status-off.svg);
+    background-repeat: no-repeat;
+    background-size: 7px;
+    background-position: center center;
+    background-color: #676767;
+    transition: margin-left 0.5s;
+  }
+  
+  &--on {
+    &:before {
+      margin-left: 15px;
+      background-color: #ee732d;
+      background-image: url(../img/status-on.svg);
+    }
+  }
+}
+
+.pw-open-toggle {
+  display: inline-block;
+  .btn-reset;
+  position: relative;
+  cursor: no-drop;
+  color: #818181;
+
+  &--available {
+    color: #ee732d;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      width: 100%;
+      position: absolute;
+      bottom: 0px;
+      border-bottom: 1px dashed #ee732d;
+    }
+  }
+}
+
+.pw-status-info {
+  font-family: Tahoma, sans-serif;
+  font-size: 0;
+  line-height: 25px;
+  color: #8b8b8b;
+  display: none;
+  
+  &--display {
+    display: flex;
+  }
+  
+  &__item-sms {
+    font-size: 13px;
+    padding-left: 13px;
+    
+    &::before {
+      content: "СМС: ";
+    }
+  }
+    
+  &__item-call {
+    font-size: 13px;
+    
+    &::before {
+      content: "Пропущенных звонков: ";
+    }
+    
+    &::after {
+      content: "|";
+      padding-left: 15px;
+    }
+  }
+}
+
+.pw-viewport {  
+  width: @w;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 0;
+  box-shadow: -10px 5px 80px 0px rgba(0, 0, 0, 0.1);
+  transition: height ease 0.5s; 
+  
+  &--display-short {
+    height: 70px;
+  }
+  
+  &--display-full {
+    height: @h;
+  } 
+}
+
+.pw-btn-minimize {
+  .btn-reset;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%; 
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 0 21px 0 rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 129px;
+  top: 510px;
+  cursor: pointer; 
+  display: none;
+  
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 2px;
+    background-color: gray;
+    height: 9px;
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    border-radius: 1px;
+    transform-origin: 1px 1px;
+  }
+  
+  &::before {
+    transform: rotate(45deg);
+  }
+  
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    background-color: #ee732d;
+    
+    &::before,
+    &::after {
+      background-color: #fff;
+    }
+  } 
+  
+  &--display {
+    display: block;
+  }
+}
+
+.pw-bar {
+  .list-reset;
+  width: @w;
+  display: flex;
+  font-family: "Exo 2", Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: #000;
+  
+  &__item {
+    flex-basis: 90px;
+    flex-grow: 1;
+    text-align: center;
+    background-color: #ededed;
+    line-height: 44px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: @orange;
+      color: #fff;
+      
+      &::before {
+        background-color: #fff;
+      }
+    }
+    
+    &--marked {
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: -10px;
+        background-color: @orange;
+        border-radius: 50%;
+        transform: translateX(-15px);
+      }
+    }
+    
+    &--active {
+      background-color: #fff;
+      
+      &:hover {
+        background-color: #fff;
+        color: #000;
+        
+        &::before {
+          background-color: @orange;
+        }
+      }
+    }    
+  }
+}
+
+.pw-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid @orange;
+  text-align: center;
+  line-height: 1;
+  font-family: "Exo 2", Tahoma, sans-serif;
+  font-size: 25px;
+  color: @orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  &__icon {
+    fill: #ee732d;
+  }
+  
+  &:hover {
+    background-color: @orange;
+    color: #fff;
+    border-color: @orange;
+    
+    .pw-btn__icon {
+      fill: #fff;
+    }
+  }
+  
+  &--color {
+    background-color: @orange;
+    color: #fff;
+    
+    .pw-btn__icon {
+      fill: #fff;
+    }
+    
+    &:hover {
+      background-color: #fff;
+      color: @orange;
+
+      .pw-btn__icon {
+        fill: @orange;
+      }
+    }
+  }
+  
+  &--disabled {
+    border-color: #979797;
+    color: #979797;
+    
+    .pw-btn__icon {
+      fill: #979797;
+    }
+    
+    &:hover {
+      background-color: #fff;
+      color: #979797;
+      border-color: #979797;
+
+      .pw-btn__icon {
+        fill: #979797;
+      }
+    }
+  }
+} /*Круглые кнопки*/
+
+.pw-number-field {
+  width: @w;
+  padding: 0 53px;
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  
+  &__field {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #fbe3d7;
+    font-family: "Exo 2", Tahoma, sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000;
+    text-align: center;
+    padding: 0;
+    
+    &:focus + .pw-number-field__clean-btn {
+      display: block;
+    }
+  }
+  
+  &__clean-btn {
+    .btn-reset;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 33px;
+    top: 7px;
+    display: none;
+    cursor: pointer;
+    
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background-color: @orange;
+      left: 7px;
+      top: 0;
+      transform-origin: center center;
+    }
+    
+    &::before {
+      transform: rotate(45deg);
+    }
+    
+    &::after {
+      transform: rotate(-45deg);
+    }
+    
+    &:hover {
+      &::before,
+      &::after {
+        background-color: #979797;
+      }
+    }
+  }
+}
+
+.pw-numpad {
+  width: @w;
+  .list-reset;
+  padding: 0 53px;
+  display: flex;
+  flex-wrap: wrap;
+  
+  &__btn {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.pw-actionpad {
+  width: @w;
+  .list-reset;
+  padding: 0 53px;
+  display: flex;
+  justify-content: space-between;
+  
+  &__btn {
+    flex-shrink: 0;
+    display: none;
+  }
+  
+  &--make-call {
+    justify-content: center;
+    
+    .pw-actionpad__btn--call {
+      display: flex;
+    }
+  }
+  
+  &--connecting {
+    justify-content: center;
+    
+    .pw-actionpad__btn--cancel {
+      display: flex; 
+    }
+  }
+  
+  &--call {
+    justify-content: center;
+    
+    .pw-actionpad__btn--cancel {
+      display: flex;
+    }
+  }
+  
+  &--transfer-call {
+    .pw-actionpad__btn--back {
+      display: flex;
+    }
+    
+    .pw-actionpad__btn--transfer {
+      display: flex;
+    }
+  }
+  
+  &--incoming-call {
+    .pw-actionpad__btn--call {
+      display: flex;
+    }
+    
+    .pw-actionpad__btn--cancel {
+      display: flex;
+    }
+  }
+  
+  &--transfer-call {
+    .pw-actionpad__btn--back {
+      display: flex;
+    }
+    
+    .pw-actionpad__btn--transfer {
+      display: flex;
+    }
+  }
+  
+  &--make-call-again {
+    .pw-actionpad__btn--back {
+      display: flex;
+    }
+    
+    .pw-actionpad__btn--call {
+      display: flex;
+    } 
+  }
+  
+  &--make-chat {
+    .pw-actionpad__btn--back {
+      display: flex;
+    }
+    
+    .pw-actionpad__btn--chat {
+      display: flex;
+    }
+  }
+}
+
+.pw-functionpad {
+  width: @w;
+  .list-reset;
+  padding: 0 53px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 120px;
+  height: 267px;
+  align-content: flex-start;
+  
+  &__btn {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    
+    &:nth-child(3n),
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+.pw-history-box {
+  width: @w;
+  height: @h - 44px;
+  position: relative;
+  
+  &__bar {
+    height: 50px;
+    width: @w;
+    display: flex;
+    font-family: "Exo 2", Tahoma, sans-serif;
+    font-size: 13px;
+    line-height: 13px;
+    color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+  &__date {
+    margin-right: auto;
+    padding-left: 20px;
+    padding-top: 30px; 
+  }
+  
+  &__add {
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+    
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 2px;
+      height: 18px;
+      left: 24px;
+      top: 16px;
+      background-color: @orange;
+      transform-origin: center center; 
+    }
+    
+    &::before {
+      transform: rotate(-90deg);
+    }
+    
+    &:hover {
+      background-color: @orange;
+      
+      &::after,
+      &::before {
+        background-color: #fff;
+      }
+    }
+  }
+  
+  &__list {
+    width: @w;
+    height: @h - 44px - 50px;
+    .list-reset;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 50px;
+  }
+}
+
+.pw-chats-box { 
+  width: @w;
+  height: @h - 44px;
+  position: relative;
+  
+  &__bar {
+    height: 50px;
+    width: @w;
+    display: flex;
+    font-family: "Exo 2", Tahoma, sans-serif;
+    font-size: 13px;
+    line-height: 13px;
+    color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+  &__date {
+    margin-right: auto;
+    padding-left: 20px;
+    padding-top: 30px; 
+  }
+  
+  &__add {
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+    
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 2px;
+      height: 18px;
+      left: 24px;
+      top: 16px;
+      background-color: @orange;
+      transform-origin: center center; 
+    }
+    
+    &::before {
+      transform: rotate(-90deg);
+    }
+    
+    &:hover {
+      background-color: @orange;
+      
+      &::after,
+      &::before {
+        background-color: #fff;
+      }
+    }
+  }
+  
+  &__list {
+    width: @w;
+    height: @h - 44px - 50px;
+    .list-reset;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 50px;
+  }
+}
+
+.pw-item {
+  height: 55px;
+  border-bottom: 1px solid #e6e6e6;
+  position: relative;
+  font-family: "Exo 2", Tahoma, sans-serif;
+  width: @w;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  
+  &__number {
+    line-height: 15px;
+    font-weight: 600;
+    font-size: 13px;
+    word-wrap: break-word;
+    flex: 1 0 120px;
+  }
+  
+  &__time {
+    line-height: 15px;
+    font-size: 11px;
+    width: 55px;
+    text-align: center;
+    flex: 0 0 55px;
+  }
+  
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 80px;
+    height: 18px;
+    left: 6px;
+    font-size: 10px;
+    line-height: 18px;
+    padding-left: 10px;
+  }
+  
+  &::before {
+    top: 13px;
+    background-image: url(../img/type-marks.svg);
+    background-repeat: no-repeat;
+    background-size: 80px auto;
+    font-weight: 600;
+  }
+  
+  &::after {
+    top: 29px;
+  }
+  
+  &--status {
+    &--answered { 
+      background-color: @l-green;
+      
+      &::after {
+        content: "Отвечен"; 
+      }
+    }
+    
+    &--missed {
+      background-color: @l-red;
+      
+      &::after {
+        content: "Пропущен"; 
+      } 
+      
+      &.pw-item--type--in::before {
+        background-position: -5px -72px;
+      }
+
+      &.pw-item--type--out::before {
+        background-position: 0 -54px;
+      }
+
+      &.pw-item--type--internal::before {
+        background-position: 0 -90px;
+      } 
+    }
+    
+    &--fail {
+      background-color: @l-red;
+      
+      &::after {
+        content: "Ошибка"; 
+      }
+      
+      &.pw-item--type--in::before {
+        background-position: -5px -72px;
+      }
+
+      &.pw-item--type--out::before {
+        background-position: 0 -54px;
+      }
+
+      &.pw-item--type--internal::before {
+        background-position: 0 -90px;
+      } 
+    }
+  }
+  
+  &--type {
+    &--in {
+      padding-left: 95px;
+      
+      &::before {
+        content: "Входящий"; 
+        background-position: -5px -18px;
+      }
+      
+      &:hover {
+        &::before {
+        background-position: -5px -126px; 
+        }
+      }
+    }
+    
+    &--out {
+      padding-left: 95px;
+      
+      &::before {
+        content: "Исходящий"; 
+        background-position: 0 0;
+      }
+      
+      &:hover {
+        &::before {
+        background-position: 0 -108px;
+        }
+      }
+    }
+    
+    &--internal {
+      padding-left: 95px;
+      
+      &::before {
+        content: "Внутренний"; 
+        background-position: 0 -36px;
+      }
+      
+      &:hover {
+        &::before {
+          background-position: 0 -144px;
+        }
+      }
+    }
+  } 
+  
+  &--chat {
+    padding-left: 20px;
+    padding-right: 35px;
+    
+    &::after {
+      display: none;
+    }
+    
+    &::before {
+      content: "";
+      display: block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid @orange;
+      position: absolute;
+      transform: rotate(45deg);
+      border-left: none;
+      border-bottom: none;
+      top: 22px;
+      left: 250px;
+      padding-left: 0;
+      background: none;
+    }
+    
+    &:hover {
+      &::before {
+        border-color: #fff;
+      }
+    }
+  }
+  
+  &--marked {
+    .pw-item__number {
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: @orange;
+        border-radius: 50%;
+        margin-left: 12px;
+      }
+    }
+    
+    &:hover {
+      .pw-item__number {
+        &::after {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+  
+  &:hover {
+    border-bottom-color: @orange;
+    background-color: @orange;
+    color: #fff;
+  }
+}
+
+.pw-chat-box {
+  width: @w;
+  overflow: hidden;
+  font-family: "Exo 2", Tahoma, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  position: relative;
+  padding: 50px 0;
+  height: @h - 44px;
+  
+  &__bar {
+    height: 50px;
+    width: @w;
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  &__back {
+    height: 50px;
+    width: 50px;
+    position: relative; 
+    padding-left: 35px;
+    padding-top: 26px;
+    cursor: pointer;
+    .btn-reset();
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    
+    
+    &::after {
+      content: "";
+      display: block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid @orange;
+      position: absolute;
+      transform: rotate(-45deg);
+      border-right: none;
+      border-bottom: none;
+      top: 20px;
+      left: 20px;
+    }
+    
+    &:hover {
+      background-color: @orange;
+      color: #fff;
+      
+      &::after {
+        border-color: #fff;
+      }
+    }
+  }
+  
+  &__number {
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  &__sms-list {
+    background-color: #f1f0f0;
+    .list-reset; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: @w;
+    height: @h - 50px - 50px - 44px;
+  }
+  
+  &__sms {
+    border-radius: 20px;
+    min-height: 40px;
+    position: relative;
+    padding: 10px 15px;
+    word-wrap: break-word;
+    margin: 20px 15px;
+    
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 10px solid transparent;
+      position: absolute;
+      bottom: 3px;
+    } 
+    
+    &--in {
+      background-color: @green;
+      margin-right: 30px;
+      
+      &::before {
+        border-right: 20px solid @green;
+        border-left: none;
+        left: -15px;
+        transform: rotate(-20deg);
+      }
+    }
+    
+    &--out {
+      background-color: #fffdfb;
+      margin-left: 30px;
+      
+      &::before {
+        border-left: 20px solid #fffdfb;
+        border-right: none;
+        right: -15px;
+        transform: rotate(20deg);
+      }
+    }
+  }
+  
+  &__field-group {
+    display: flex;
+    height: 50px;
+    width: @w;
+    
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  &__sms-field {
+    display: block;
+    width: 150px;
+    flex-grow: 1;
+    line-height: 50px;
+    border: none;
+    padding-left: 15px;
+  }
+  
+  &__send-btn {
+    display: block;
+    line-height: 50px;
+    width: 100px;
+    background-color: #fff;
+    border: none;
+    flex-shrink: 0;
+    color: @orange;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: @orange;
+      color: #fff; 
+    }
+  }
+}
+
+.pw-indicator {
+  width: @w;
+  height: 70px;
+  background-image: url(../img/call-mask.svg);
+  background-color: #cefa90;
+  background-size: auto 70px;
+  background-repeat: no-repeat;
+  font-family: "Exo 2", Tahoma, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  
+  &__number {
+    color: #000;
+    font-size: 20px;
+    display: block;
+    padding-top: 16px;
+    font-weight: 600;
+  }
+  
+  &__time {
+    display: none;
+  }
+   
+  &--call-in {
+    animation: call-in 2.3s ease infinite;
+    
+    &::after {
+      content: "Входящий";
+      display: block;
+    }
+  }
+  
+  &--call-out {
+    animation: call-out 2.3s ease infinite;
+    
+    &::after {
+      content: "Вызов...";
+      display: block;
+    }
+  }
+  
+  &--cancel {
+    background-color: @red;
+    background-image: none;
+    
+    &::after {
+      content: "Отмена";
+      display: block;
+    }
+  }
+  
+  &--call {
+    background-color: @green;
+    background-image: none;
+    
+    &::after {
+      display: none;
+    }
+    
+    .pw-indicator__time {
+      display: block;
+    }
+  }
+  
+  &--sms {
+    background-color: @green;
+    background-image: none;
+    
+    &::after {
+      content: "СМС";
+      display: block;
+    }
+  }
+  
+  &__info {
+    margin: 0;
+  }
+}
+
+.pw-block-hidden {
+  display: none;
+}
+
+
+
+
+
+
+
+
