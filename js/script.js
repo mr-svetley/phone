@@ -1,7 +1,7 @@
 var phoneWidget = (function(){
   
   var widget = document.querySelector('#phone-widget');
-  var widget = document.querySelector('body'); /*Для блоков-презентаций, по завершению разработки удалить*/
+  var widget = document.querySelector('body'); /*Для презентации блоков, по завершению разработки удалить*/
   
   var scrollerWrapper = widget.querySelectorAll('.js-pw-scroller-wrapper');
   var scroller;
